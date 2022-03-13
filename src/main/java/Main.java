@@ -1,5 +1,8 @@
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import dto.Car;
 import dto.User;
 
@@ -32,6 +35,27 @@ public class Main {
 
         String json = objectMapper.writeValueAsString(user);
         System.out.println(json);
+
+
+        JsonNode jsonNode = objectMapper.readTree(json);
+        String _name = jsonNode.get("name").asText();
+        int _age = jsonNode.get("age").asInt();
+        System.out.println("name : " + _name);
+        System.out.println("ages : " +_age);
+
+        JsonNode cars = jsonNode.get("cars");
+        ArrayNode arrayNode = (ArrayNode)cars;
+
+        List<Car> _cars = objectMapper.convertValue(arrayNode, new TypeReference<List<Car>>() {});
+
+        System.out.println(_cars);
+
+        //Ojbect Node 를 바
+
+//        String _list = jsonNode.get("cars").asText();
+//        System.out.println(_list);
+
+
 
 
     }
