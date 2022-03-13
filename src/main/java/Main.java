@@ -3,6 +3,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import dto.Car;
 import dto.User;
 
@@ -50,13 +51,14 @@ public class Main {
 
         System.out.println(_cars);
 
-        //Ojbect Node 를 바
+        //Ojbect Node 를 바꿔준다
 
+        ObjectNode objectNode = (ObjectNode) jsonNode;
+        objectNode.put("name", "steve");
+        objectNode.put("age", 20);
+
+        System.out.println(objectNode.toPrettyString());
 //        String _list = jsonNode.get("cars").asText();
 //        System.out.println(_list);
-
-
-
-
     }
 }
